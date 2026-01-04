@@ -1,0 +1,77 @@
+/* Global Design System */
+:root {
+  /* Color Palette */
+  --color-mehroon: #800000;
+  --color-mehroon-warm: #660000; /* Darker/Warmer variant */
+  --color-beige: #F9F7F2; /* Slightly warmer/lighter beige for full backgrounds */
+  --color-beige-dark: #F0EAD6; /* "Eggshell" for cards/sections */
+  --color-charcoal: #2C2C2C; /* Deep, rich charcoal */
+  --color-stone: #D8D4CE; /* Warm Stone */
+
+  /* Typography */
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-accent: 'Cormorant Garamond', serif;
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --spacing-xl: 8rem;
+
+  /* Transitions */
+  --transition-fast: 0.3s ease;
+  --transition-smooth: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-beige);
+  color: var(--color-charcoal);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 400; /* Editorial look */
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: clamp(3rem, 5vw, 5rem);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(2rem, 3vw, 3.5rem);
+}
+
+p {
+  font-size: 1.125rem;
+  opacity: 0.9;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition-fast);
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}

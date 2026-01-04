@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odyssey | Experiences</title>
+
+    <!-- Fonts & CSS -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,600&family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/reference.css">
+
+    <style>
+        /* Reusing App Layout */
+        .app-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background-color: #FBF9F4;
+            border-right: 1px solid var(--color-stone);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            color: var(--color-charcoal);
+            font-family: var(--font-sans);
+            font-weight: 500;
+            opacity: 0.7;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            opacity: 1;
+            color: var(--color-mehroon);
+        }
+
+        .main-content {
+            padding: 3rem;
+            background-color: var(--color-beige);
+        }
+
+        /* Experience Cards */
+        .exp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .exp-card {
+            background: #fff;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .exp-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .exp-img {
+            height: 250px;
+            background-color: #ddd;
+            position: relative;
+        }
+
+        .exp-content {
+            padding: 1.5rem;
+        }
+
+        .exp-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-mehroon);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .exp-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .exp-desc {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .btn-book {
+            width: 100%;
+            padding: 0.8rem;
+            text-align: center;
+            border: 1px solid var(--color-stone);
+            background: transparent;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+        }
+
+        .btn-book:hover {
+            border-color: var(--color-mehroon);
+            color: var(--color-mehroon);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app-layout">
+        <aside class="sidebar">
+            <a href="index.html" class="logo" style="margin-bottom: 3rem; text-decoration: none;">ODYSSEY</a>
+            <nav>
+                <a href="app.html" class="nav-item">Curated Matches</a>
+                <a href="messages.html" class="nav-item">Messages</a>
+                <a href="experiences.html" class="nav-item active">Experiences</a>
+                <a href="journal.html" class="nav-item">Journal</a>
+            </nav>
+            <div style="margin-top: auto;">
+                <a href="#" class="nav-item">Settings</a>
+                <a href="index.html" class="nav-item">Log Out</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header style="margin-bottom: 3rem;">
+                <h2 style="font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 0.5rem;">Curated
+                    Experiences</h2>
+                <p style="opacity: 0.7;">Designing the perfect setting for connection.</p>
+            </header>
+
+            <div class="exp-grid">
+                <!-- Card 1 -->
+                <div class="exp-card">
+                    <div class="exp-img"
+                        style="background: url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80') center/cover;">
+                    </div>
+                    <div class="exp-content">
+                        <span class="exp-tag">Brooklyn • Sat 7PM</span>
+                        <h3 class="exp-title">Midnight Jazz & Cocktails</h3>
+                        <p class="exp-desc">An intimate evening at The Blue Note. Reserved seating for two, including a
+                            flight of signature cocktails.</p>
+                        <button class="btn-book" onclick="alert('Reservation Request Sent!')">Request
+                            Invitation</button>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="exp-card">
+                    <div class="exp-img"
+                        style="background: url('https://images.unsplash.com/photo-1459749411177-287ce3276916?auto=format&fit=crop&w=800&q=80') center/cover;">
+                    </div>
+                    <div class="exp-content">
+                        <span class="exp-tag">Chelsea • Sun 2PM</span>
+                        <h3 class="exp-title">Wheel Throwing Workshop</h3>
+                        <p class="exp-desc">Connect over clay. A private 2-hour session with a master potter. Messy,
+                            creative, and grounded.</p>
+                        <button class="btn-book" onclick="alert('Reservation Request Sent!')">Request
+                            Invitation</button>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="exp-card">
+                    <div class="exp-img"
+                        style="background: url('https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=800&q=80') center/cover;">
+                    </div>
+                    <div class="exp-content">
+                        <span class="exp-tag">Upstate • Weekend</span>
+                        <h3 class="exp-title">Architectural Cabin Retreat</h3>
+                        <p class="exp-desc">Escape the city. A coordinated weekend getaway in a glass cabin. Hiking
+                            guides included.</p>
+                        <button class="btn-book" onclick="alert('Reservation Request Sent!')">Request
+                            Invitation</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+
+</html>

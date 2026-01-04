@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odyssey | Journal</title>
+
+    <!-- Fonts & CSS -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,600&family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/reference.css">
+
+    <style>
+        .app-layout {
+            display: grid;
+            grid-template-columns: 250px 300px 1fr;
+            /* 3 col layout */
+            min-height: 100vh;
+        }
+
+        /* Reusing sidebar styles (inline for speed in prototype, but consistent with reference.css vars) */
+        .sidebar {
+            background-color: #FBF9F4;
+            border-right: 1px solid var(--color-stone);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .entries-list {
+            background-color: #fff;
+            border-right: 1px solid var(--color-stone);
+            overflow-y: auto;
+        }
+
+        .entry-item {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .entry-item:hover,
+        .entry-item.active {
+            background-color: var(--color-beige);
+        }
+
+        .entry-date {
+            font-size: 0.8rem;
+            opacity: 0.6;
+            margin-bottom: 0.25rem;
+        }
+
+        .entry-title {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            color: var(--color-charcoal);
+            font-family: var(--font-sans);
+            font-weight: 500;
+            opacity: 0.7;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            opacity: 1;
+            color: var(--color-mehroon);
+        }
+
+        .editor-area {
+            padding: 3rem;
+            background-color: var(--color-beige);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .editor-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            outline: none;
+            color: var(--color-primary);
+        }
+
+        .editor-textarea {
+            width: 100%;
+            flex: 1;
+            background: transparent;
+            border: none;
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            outline: none;
+            resize: none;
+        }
+
+        .editor-actions {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app-layout">
+        <aside class="sidebar">
+            <a href="index.html" class="logo" style="margin-bottom: 3rem; text-decoration: none;">ODYSSEY</a>
+            <nav>
+                <a href="app.html" class="nav-item">Curated Matches</a>
+                <a href="messages.html" class="nav-item">Messages</a>
+                <a href="experiences.html" class="nav-item">Experiences</a>
+                <a href="journal.html" class="nav-item active">Journal</a>
+            </nav>
+            <div style="margin-top: auto;">
+                <a href="#" class="nav-item">Settings</a>
+                <a href="index.html" class="nav-item">Log Out</a>
+            </div>
+        </aside>
+
+        <section class="entries-list" id="entriesList">
+            <div class="entry-item active">
+                <div class="entry-date">TODAY</div>
+                <div class="entry-title">New Entry...</div>
+            </div>
+            <!-- Dynamic entries will go here -->
+        </section>
+
+        <main class="editor-area">
+            <input type="text" class="editor-input" placeholder="Title your thought..." id="entryTitle">
+            <textarea class="editor-textarea" placeholder="Reflect on your connection..." id="entryBody"></textarea>
+            <div class="editor-actions">
+                <button class="btn btn-primary" id="saveBtn">Save Entry</button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const titleInput = document.getElementById('entryTitle');
+            const bodyInput = document.getElementById('entryBody');
+            const saveBtn = document.getElementById('saveBtn');
+            const listContainer = document.getElementById('entriesList');
+
+            // Load saved entries
+            let entries = JSON.parse(localStorage.getItem('odysseyJournal')) || [];
+
+            function renderList() {
+                // Clear list except "New Entry"
+                listContainer.innerHTML = `
+                    <div class="entry-item active" onclick="clearEditor()">
+                        <div class="entry-date">TODAY</div>
+                        <div class="entry-title">New Entry...</div>
+                    </div>
+                `;
+
+                entries.forEach((entry, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'entry-item';
+                    item.innerHTML = `
+                        <div class="entry-date">${entry.date}</div>
+                        <div class="entry-title">${entry.title}</div>
+                    `;
+                    item.addEventListener('click', () => loadEntry(index));
+                    listContainer.appendChild(item);
+                });
+            }
+
+            window.clearEditor = () => {
+                titleInput.value = '';
+                bodyInput.value = '';
+            };
+
+            function loadEntry(index) {
+                const entry = entries[index];
+                titleInput.value = entry.title;
+                bodyInput.value = entry.body;
+            }
+
+            saveBtn.addEventListener('click', () => {
+                const title = titleInput.value.trim() || 'Untitled';
+                const body = bodyInput.value.trim();
+
+                if (!body) return;
+
+                const newEntry = {
+                    title,
+                    body,
+                    date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+                };
+
+                entries.unshift(newEntry);
+                localStorage.setItem('odysseyJournal', JSON.stringify(entries));
+
+                alert('Reflection Saved');
+                renderList();
+                clearEditor();
+            });
+
+            renderList();
+        });
+    </script>
+</body>
+
+</html>

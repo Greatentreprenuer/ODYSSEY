@@ -1,0 +1,5 @@
+.DS_Store
+odyssey_launch.zip
+node_modules/
+.env
+*.log

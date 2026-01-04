@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odyssey | Messages</title>
+
+    <!-- Fonts & CSS -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,600&family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/reference.css">
+    <!-- <link rel="stylesheet" href="css/components.css"> -->
+
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .msg-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            flex: 1;
+        }
+
+        /* Sidebar Styles */
+        .msg-sidebar {
+            background-color: #FBF9F4;
+            border-right: 1px solid var(--color-stone);
+            overflow-y: auto;
+        }
+
+        .msg-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--color-stone);
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+        }
+
+        .conversation-item {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .conversation-item:hover,
+        .conversation-item.active {
+            background-color: rgba(128, 0, 0, 0.05);
+        }
+
+        .conv-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .conv-preview {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Chat Area */
+        .chat-area {
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+        }
+
+        .chat-header {
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--color-stone);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            background-color: var(--color-beige);
+        }
+
+        .message {
+            max-width: 60%;
+            margin-bottom: 1.5rem;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .msg-received {
+            background-color: #fff;
+            border: 1px solid var(--color-stone);
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+
+        .msg-sent {
+            background-color: var(--color-mehroon);
+            color: var(--color-beige);
+            margin-left: auto;
+            border-bottom-right-radius: 2px;
+        }
+
+        .chat-input-area {
+            padding: 1.5rem 2rem;
+            background-color: #fff;
+            border-top: 1px solid var(--color-stone);
+        }
+
+        /* Odyssey Prompt Widget */
+        .prompt-widget {
+            background-color: #FBF9F4;
+            border: 1px dashed var(--color-mehroon);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .prompt-label {
+            font-family: var(--font-accent);
+            color: var(--color-mehroon);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .prompt-text {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .chat-controls {
+            display: flex;
+            gap: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="msg-grid">
+        <!-- Sidebar -->
+        <aside class="msg-sidebar">
+            <div class="msg-header">
+                Conversations
+                <a href="app.html"
+                    style="font-size: 0.9rem; float: right; margin-top: 5px; font-family: var(--font-sans); color: var(--color-mehroon);">Back</a>
+            </div>
+
+            <div class="conversation-item active">
+                <div class="conv-name">Elena <span style="font-weight: 400; opacity: 0.5; font-size: 0.8rem;">2m
+                        ago</span></div>
+                <div class="conv-preview">I think vulnerability is actually a strength...</div>
+            </div>
+
+            <div class="conversation-item">
+                <div class="conv-name">Julian <span style="font-weight: 400; opacity: 0.5; font-size: 0.8rem;">1d
+                        ago</span></div>
+                <div class="conv-preview">Have you ever been to the Tate Modern?</div>
+            </div>
+        </aside>
+
+        <!-- Main Chat -->
+        <main class="chat-area">
+            <div class="chat-header">
+                <div style="font-family: var(--font-serif); font-size: 1.5rem;">Elena</div>
+                <button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.8rem;">View Profile</button>
+            </div>
+
+            <div class="chat-messages">
+                <div style="text-align: center; margin-bottom: 2rem; opacity: 0.5; font-size: 0.85rem;">You matched on
+                    Oct 24</div>
+
+                <div class="message msg-received">
+                    Hi! I saw in your profile that you value "Growth". What does that look like for you this year?
+                </div>
+
+                <div class="message msg-sent">
+                    Hey Elena. For me, it's about stepping out of my comfort zone creatively. I've started painting
+                    again.
+                </div>
+
+                <div class="message msg-received">
+                    That's beautiful. I think vulnerability is actually a strength in art. What do you paint?
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <!-- Odyssey Prompt -->
+                <div class="prompt-widget">
+                    <div class="prompt-label">Odyssey Spark</div>
+                    <div class="prompt-text">"What is a memory that defined your childhood?"</div>
+                    <button class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.25rem 1rem;">Use this
+                        prompt</button>
+                </div>
+
+                <div class="chat-controls">
+                    <input type="text" class="input-field" placeholder="Write a thoughtful message..."
+                        style="margin-bottom: 0;">
+                    <button class="btn btn-primary" style="padding: 0 2rem;">Send</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/messages.js"></script>
+</body>
+
+</html>
